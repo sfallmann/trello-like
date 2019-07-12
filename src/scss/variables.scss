@@ -1,0 +1,31 @@
+// sizes
+// html font-size set to .625rem will make 1rem = 10px 
+$root-font-size: .625rem;
+$small-font-size: 1rem;
+$medium-font-size: 1.4rem;
+$large-font-size: 1.8rem;
+
+
+// box shadows
+$default-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+
+// colors
+$blue-grey: #DFE1E6;
+$blue: #0079BF;
+
+
+// mixins
+@mixin center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// z-index
+$z-dropdown: 10;
+
+// border-radius
+
+$border-radius: .3rem;
