@@ -38,7 +38,7 @@
             />
           <div role="button" class="add-card-link" v-show="!isCardFormVisible" @click="showCardForm">
             <span class="add-card-link-plus">+</span>
-            <span class="add-card-link-text">Add another card</span>
+            <span class="add-card-link-text">{{ addCardLinkText }}</span>
           </div>
         </content-block>
       </div>
@@ -104,6 +104,9 @@ export default {
     footerClass() {
       const cls = 'card-list-footer';
       return this.isCardFormVisible ? cls : `${cls} no-form`;
+    },
+    addCardLinkText() {
+      return this.cards.length ? 'Add another card' : 'Add a card';
     }
   },
   methods: {
@@ -129,7 +132,6 @@ export default {
     handleAddCard(){
       this.cards.push(this.newCardText);
       this.newCardText = '';
-      this.isCardFormVisible = false;
     }
   },
 };
@@ -171,7 +173,9 @@ export default {
     }
   }
   .card-list-content {
+    flex-direction: column;
     .item {
+      margin-bottom: 1rem;
       width: 100%;
       height: 3.5rem;
       line-height: 3.5rem;
@@ -184,8 +188,6 @@ export default {
     }
   }
   .card-list-footer {
-    margin-top: 1rem;
-    
     &.no-form {
       cursor: pointer;
       &:hover {

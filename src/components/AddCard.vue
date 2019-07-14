@@ -64,7 +64,6 @@ export default {
 <style lang="scss">
 @import '@/scss/variables.scss';
 .new-card-form {
-  margin-top: 1rem;
    width: 100%;
   .add-card-btn {
     background-color: $green;
