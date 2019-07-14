@@ -5,3 +5,4 @@ export const WATCH = 'WATCH';
 export const MOVE_ALL_CARDS = 'MOVE_ALL_CARDS';
 export const ARCHIVE_ALL_CARDS = 'ARCHIVE_ALL_CARDS';
 export const ARCHIVE_LIST = 'ARCHIVE_LIST';
+export const CANCEL_ADD_CARD = 'CANCEL_ADD_CARD';

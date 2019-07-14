@@ -29,11 +29,7 @@
     <template v-slot:footer>
       <div class="card-list-footer-wrapper" v-click-outside="closeCardForm">
         <content-block :className="footerClass">
-          <div class="new-card-form" v-show="isCardFormVisible">
-            <v-text-area 
-              placeholder="Enter a title for this card..."
-            />
-          </div>
+          <add-card v-show="isCardFormVisible"  @cancel="closeCardForm" v-model="newCardText" @input="testtxt" />
           <div role="button" class="add-card-link" v-show="!isCardFormVisible" @click="showCardForm">
             <span class="add-card-link-plus">+</span>
             <span class="add-card-link-text">Add another card</span>
@@ -46,6 +42,7 @@
 
 <script>
 import { Container, ContentBlock, VButton, Menu, VInput, VTextArea } from '@/components/common';
+import AddCard from '@/components/AddCard.vue';
 import { listActions } from '../constants';
 
 export default {
@@ -57,6 +54,7 @@ export default {
     VButton,
     VInput,
     VTextArea,
+    AddCard,
   },
   data() {
     return {
@@ -93,6 +91,7 @@ export default {
         ],
       },
       isMenuOpen: false,
+      newCardText: '',
     };
   },
   computed: {
@@ -113,14 +112,13 @@ export default {
       console.log(event);
     },
     showCardForm() {
-      this.isCardFormVisible = true;
-      this.$nextTick(() => {
-        this.$refs.vTextArea.focus();
-      })
-      
+      this.isCardFormVisible = true;      
     },
     closeCardForm() {
       this.isCardFormVisible = false;
+    },
+    testtxt() {
+      console.log('new text', this.newCardText)
     }
   },
 };
@@ -176,10 +174,6 @@ export default {
   }
   .card-list-footer {
     margin-top: 1rem;
-
-    .new-card-form {
-      width: 100%;
-    }
     
     &.no-form {
       cursor: pointer;
