@@ -1,13 +1,11 @@
 <template>
   <div class="new-card-form">
-    TEXT
     <v-text-area 
       placeholder="Enter a title for this card..."
-      value="cardText"
-      @input="$emit('input', value)"
+      :value="value"
     />
     <content-block>
-      <v-button className="add-card-btn" @click="$emit('add')">
+      <v-button className="add-card-btn" @click="handleAddCard">
         Add Card
       </v-button>
       <v-button className="cancel-add-btn" @click="$emit('cancel')">
@@ -23,10 +21,17 @@ import VButton from '@/components/common/VButton.vue';
 
 export default {
   props: {
-    cardText: {
+    value: {
       type: String,
       default: ''
     }
+  },
+  mounted() {
+    this.$refs.vTextArea.addEventListener('keypress', this.handleEnterKey);
+    this.$refs.vTextArea.focus();
+    this.$once("hook:beforeDestroy", () => {
+      this.$refs.vTextArea.removeEventListener('keypress', this.handleEnterKey);
+    })    
   },
   name: 'AddCard',
   components: {
@@ -34,6 +39,26 @@ export default {
     ContentBlock,
     VButton,
   },
+  methods: {
+    handleAddCard() {
+      if (this.value === '') {
+        this.$refs.vTextArea.focus();
+        return;
+      }
+      this.$emit('add');
+    },
+    handleEnterKey(event) {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        if (this.value) {
+          this.handleAddCard();
+        } 
+      } else {
+        this.$emit('input', event.target.value);
+      }
+    },
+
+  }
 }
 </script>
 <style lang="scss">

@@ -21,15 +21,21 @@
     </template>
     <template v-slot:content>
       <content-block className="card-list-content">
-        <div class="item">
-          Some words...
+        <div class="item" v-for="item in cards" :key="item" >
+          {{ item }}
         </div>
       </content-block>
     </template>
     <template v-slot:footer>
       <div class="card-list-footer-wrapper" v-click-outside="closeCardForm">
         <content-block :className="footerClass">
-          <add-card v-show="isCardFormVisible"  @cancel="closeCardForm" v-model="newCardText" @input="testtxt" />
+          <add-card 
+            v-if="isCardFormVisible" 
+            v-model="newCardText"
+            @cancel="closeCardForm"
+            @add="handleAddCard"
+            @input="testtxt" 
+            />
           <div role="button" class="add-card-link" v-show="!isCardFormVisible" @click="showCardForm">
             <span class="add-card-link-plus">+</span>
             <span class="add-card-link-text">Add another card</span>
@@ -119,6 +125,11 @@ export default {
     },
     testtxt() {
       console.log('new text', this.newCardText)
+    },
+    handleAddCard(){
+      this.cards.push(this.newCardText);
+      this.newCardText = '';
+      this.isCardFormVisible = false;
     }
   },
 };
