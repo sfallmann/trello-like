@@ -21,21 +21,21 @@
     </template>
     <template v-slot:content>
       <content-block className="card-list-content">
-        <div class="item" v-for="item in cards" :key="item" >
-          {{ item }}
+        <div class="item" v-for="(item, index) in cards" :key="item.id" @click="handleCardClick(index)">
+          {{ item.text }}
         </div>
       </content-block>
     </template>
     <template v-slot:footer>
       <div class="card-list-footer-wrapper" v-click-outside="closeCardForm">
         <content-block :className="footerClass">
-          <add-card 
+          <add-card v-bind:is="components.AddCard"
             v-if="isCardFormVisible" 
             v-model="newCardText"
             @cancel="closeCardForm"
             @add="handleAddCard"
             @input="testtxt" 
-            />
+          />
           <div role="button" class="add-card-link" v-show="!isCardFormVisible" @click="showCardForm">
             <span class="add-card-link-plus">+</span>
             <span class="add-card-link-text">{{ addCardLinkText }}</span>
@@ -64,6 +64,8 @@ export default {
   },
   data() {
     return {
+      components: {
+      },
       title: 'First',
       cards: [],
       isCardFormVisible: false,
@@ -130,8 +132,15 @@ export default {
       console.log('new text', this.newCardText)
     },
     handleAddCard(){
-      this.cards.push(this.newCardText);
+      const newCard = {
+        id: this.cards.length + 1,
+        text: this.newCardText,
+      };
+      this.cards.push(newCard);
       this.newCardText = '';
+    },
+    handleCardClick(index) {
+      console.log(this.cards[index]);
     }
   },
 };
