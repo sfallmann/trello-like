@@ -1,28 +1,26 @@
 <template>
-  <Container className="menu">
+  <container className="menu">
     <template v-slot:header>
-      <ContentBlock className="menu-header">
+      <content-block className="menu-header">
         <span class="title">{{ title }}</span>
         <span v-if="canClose" class="close" @click="$emit('closed')">x</span>
         <hr/>
-      </ContentBlock>
+      </content-block>
     </template>
-    <template v-slot:content >
-      <ContentBlock
-        className="menu-content"
-      >
-        <ul v-for="(group, index) in groups" :key="index">
-          <li
-            v-for="(item) in group.list" :key="item.value"
-            @click="$emit('selected', item.value)"
-          >
-            <span>{{ item.text }}</span>
-          </li>
-          <div  v-show="index !== numOfGroups - 1"><hr/></div>
-        </ul>
-      </ContentBlock>
-    </template>
-  </Container>
+    <content-block
+      className="menu-content"
+    >
+      <ul v-for="(group, index) in groups" :key="index">
+        <li
+          v-for="(item) in group.list" :key="item.value"
+          @click="$emit('selected', item.value)"
+        >
+          <span>{{ item.text }}</span>
+        </li>
+        <div  v-show="index !== numOfGroups - 1"><hr/></div>
+      </ul>
+    </content-block>
+  </container>
 </template>
 <script>
 import { Container, ContentBlock } from '@/components/common';
