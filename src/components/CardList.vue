@@ -19,13 +19,11 @@
         </div>
       </content-block>
     </template>
-    <template v-slot:content>
-      <content-block className="card-list-content">
-        <div class="item" v-for="(item, index) in cards" :key="item.id" @click="handleCardClick(index)">
-          {{ item.text }}
-        </div>
-      </content-block>
-    </template>
+    <content-block className="card-list-content">
+      <div class="item">
+        Some words...
+      </div>
+    </content-block>
     <template v-slot:footer>
       <div class="card-list-footer-wrapper" v-click-outside="closeCardForm">
         <content-block :className="footerClass">
