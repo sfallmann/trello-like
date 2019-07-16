@@ -9,7 +9,7 @@
       :name="props.name"
       :type="props.type || 'text'"
       :id="props.id"
-      @input="listeners.input && listeners.input($event.target.value)"
+      @input="listeners.input && listeners.input($event)"
     />
   </div>
 </template>
