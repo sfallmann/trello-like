@@ -1,5 +1,8 @@
 <template functional>
-  <button class="btn" :class="props.className" @click="listeners.click">
+  <button class="btn"
+    :class="props.className"
+    @click="listeners.click && listeners.click($event)"
+  >
     <slot></slot>
   </button>
 </template>

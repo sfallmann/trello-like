@@ -1,6 +1,6 @@
 <template>
   <div class="new-card-form">
-    <v-text-area 
+    <v-text-area
       placeholder="Enter a title for this card..."
       :value="value"
     />
@@ -10,7 +10,7 @@
       </v-button>
       <v-button className="cancel-add-btn" @click="$emit('cancel')">
         X
-      </v-button>      
+      </v-button>
     </content-block>
   </div>
 </template>
@@ -20,20 +20,20 @@ import ContentBlock from '@/components/common/ContentBlock.vue';
 import VButton from '@/components/common/VButton.vue';
 
 export default {
+  name: 'AddCard',
   props: {
     value: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   mounted() {
     this.$refs.vTextArea.addEventListener('keypress', this.handleEnterKey);
     this.$refs.vTextArea.focus();
-    this.$once("hook:beforeDestroy", () => {
+    this.$once('hook:beforeDestroy', () => {
       this.$refs.vTextArea.removeEventListener('keypress', this.handleEnterKey);
-    })    
+    });
   },
-  name: 'AddCard',
   components: {
     VTextArea,
     ContentBlock,
@@ -52,14 +52,14 @@ export default {
         event.preventDefault();
         if (this.value) {
           this.handleAddCard();
-        } 
+        }
       } else {
         this.$emit('input', event.target.value);
       }
     },
 
-  }
-}
+  },
+};
 </script>
 <style lang="scss">
 @import '@/scss/variables.scss';
@@ -77,4 +77,3 @@ export default {
   }
 }
 </style>
-

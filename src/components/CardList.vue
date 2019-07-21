@@ -20,21 +20,33 @@
       </content-block>
     </template>
     <content-block className="card-list-content">
-      <div class="item">
-        Some words...
+      <div class="item"
+        v-for="(card, index) in cards"
+        :key="card.id"
+        @click="handleCardClick(index)"
+      >
+        {{ card.text }}
       </div>
+      <edit-card-modal
+        v-show="isEditingCard"
+        @closed="closeEditCardForm"
+      ></edit-card-modal>
     </content-block>
     <template v-slot:footer>
-      <div class="card-list-footer-wrapper" v-click-outside="closeCardForm">
+      <div class="card-list-footer-wrapper" v-click-outside="closeAddCardForm">
         <content-block :className="footerClass">
-          <add-card v-bind:is="components.AddCard"
-            v-if="isCardFormVisible" 
+          <add-card
+            v-if="isCardFormVisible"
             v-model="newCardText"
-            @cancel="closeCardForm"
+            @cancel="closeAddCardForm"
             @add="handleAddCard"
-            @input="testtxt" 
+            @input="testtxt"
           />
-          <div role="button" class="add-card-link" v-show="!isCardFormVisible" @click="showCardForm">
+          <div role="button"
+            class="add-card-link"
+            v-show="!isCardFormVisible"
+            @click="showAddCardForm"
+          >
             <span class="add-card-link-plus">+</span>
             <span class="add-card-link-text">{{ addCardLinkText }}</span>
           </div>
@@ -45,9 +57,12 @@
 </template>
 
 <script>
-import { Container, ContentBlock, VButton, Menu, VInput, VTextArea } from '@/components/common';
+import {
+  Container, ContentBlock, VButton, Menu, VInput,
+} from '@/components/common';
 import AddCard from '@/components/AddCard.vue';
-import { listActions } from '../constants';
+import EditCardModal from '@/components/EditCardModal.vue';
+import listActions from '@/constants';
 
 export default {
   name: 'CardList',
@@ -57,16 +72,15 @@ export default {
     Menu,
     VButton,
     VInput,
-    VTextArea,
     AddCard,
+    EditCardModal,
   },
   data() {
     return {
-      components: {
-      },
       title: 'First',
       cards: [],
       isCardFormVisible: false,
+      isEditingCard: false,
       menuOptions: {
         title: 'List Actions',
         groups: [
@@ -107,7 +121,7 @@ export default {
     },
     addCardLinkText() {
       return this.cards.length ? 'Add another card' : 'Add a card';
-    }
+    },
   },
   methods: {
     toggleMenu() {
@@ -117,29 +131,34 @@ export default {
       this.isMenuOpen = false;
     },
     menuItemSelected(event) {
-      console.log('hello')
+      console.log('hello');
       console.log(event);
     },
-    showCardForm() {
-      this.isCardFormVisible = true;      
+    showAddCardForm() {
+      this.isCardFormVisible = true;
     },
-    closeCardForm() {
+    closeAddCardForm() {
       this.isCardFormVisible = false;
     },
     testtxt() {
-      console.log('new text', this.newCardText)
+      console.log('new text', this.newCardText);
     },
-    handleAddCard(){
+    handleAddCard() {
       const newCard = {
         id: this.cards.length + 1,
         text: this.newCardText,
       };
       this.cards.push(newCard);
       this.newCardText = '';
+      console.log(this.cards);
     },
     handleCardClick(index) {
+      this.isEditingCard = true;
       console.log(this.cards[index]);
-    }
+    },
+    closeEditCardForm() {
+      this.isEditingCard = false;
+    },
   },
 };
 </script>
@@ -199,7 +218,7 @@ export default {
       cursor: pointer;
       &:hover {
         background-color: lighten($blue-grey, 5%);
-      }      
+      }
     }
 
     .add-card-link {
@@ -207,7 +226,7 @@ export default {
       &:hover {
         .add-card-link-text{
           text-decoration: underline;
-        }        
+        }
       }
       .add-card-link-plus {
         color: darken($blue-grey, 40%);
@@ -215,11 +234,11 @@ export default {
         font-size: $large-font-size;
         margin-right: .5rem;
       }
-      
+
       padding: 0 .5rem .5rem .5rem;
       width: 100%;
     }
   }
-  
+
 }
 </style>

@@ -23,7 +23,8 @@
   </container>
 </template>
 <script>
-import { Container, ContentBlock } from '@/components/common';
+import Container from '@/components/common/Container.vue';
+import ContentBlock from '@/components/common/ContentBlock.vue';
 
 export default {
   name: 'Menu',
@@ -39,7 +40,7 @@ export default {
     canClose: {
       type: Boolean,
       default: true,
-    }
+    },
   },
   components: {
     Container,

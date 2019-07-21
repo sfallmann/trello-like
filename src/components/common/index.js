@@ -4,6 +4,7 @@ import Menu from '@/components/common/Menu.vue';
 import VButton from '@/components/common/VButton.vue';
 import VInput from '@/components/common/VInput.vue';
 import VTextArea from '@/components/common/VTextArea.vue';
+import PageOverlay from '@/components/common/PageOverlay.vue';
 
 export {
   Container,
@@ -12,4 +13,5 @@ export {
   VButton,
   VInput,
   VTextArea,
+  PageOverlay,
 };

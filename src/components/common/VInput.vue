@@ -20,7 +20,7 @@
     font-size: $medium-font-size;
     font-weight: 600;
     height: 3rem;
-    line-height: 3rem;   
+    line-height: 3rem;
     border: none;
     width: 22rem;
     cursor: pointer;
