@@ -3,7 +3,7 @@
     <template v-slot:header>
       <content-block className="card-list-header">
         <!-- <div class="card-list-title">First List</div> -->
-        <v-input v-model="title" />
+        <v-input v-model="title.current" @enter="handleLostFocus('title')" @blur="handleLostFocus('title')" />
         <div class="card-list-menu-wrapper" v-click-outside="closeMenu">
           <v-button className="card-list-menu-btn" @click="toggleMenu">
             <font-awesome-icon icon="ellipsis-h" transform="grow-6" />
@@ -77,7 +77,10 @@ export default {
   },
   data() {
     return {
-      title: 'First',
+      title: {
+        previous: 'First',
+        current: 'First',
+      },
       cards: [],
       isCardFormVisible: false,
       isEditingCard: false,
@@ -124,6 +127,11 @@ export default {
     },
   },
   methods: {
+    handleLostFocus(type) {
+      if (type === 'title' && !this.title.current) {
+        this.title.current = this.title.previous;
+      }
+    },
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen;
     },

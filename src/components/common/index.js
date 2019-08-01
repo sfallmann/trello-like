@@ -5,6 +5,7 @@ import VButton from '@/components/common/VButton.vue';
 import VInput from '@/components/common/VInput.vue';
 import VTextArea from '@/components/common/VTextArea.vue';
 import PageOverlay from '@/components/common/PageOverlay.vue';
+import CloseButton from '@/components/common/CloseButton.vue';
 
 export {
   Container,
@@ -14,4 +15,5 @@ export {
   VInput,
   VTextArea,
   PageOverlay,
+  CloseButton,
 };

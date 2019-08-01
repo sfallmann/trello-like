@@ -1,4 +1,5 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisH, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faEllipsisH);
+library.add(faTimes);

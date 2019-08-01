@@ -3,7 +3,7 @@
     <template v-slot:header>
       <content-block className="menu-header">
         <span class="title">{{ title }}</span>
-        <span v-if="canClose" class="close" @click="$emit('closed')">x</span>
+        <close-button v-if="canClose" @click="$emit('closed')" className="close" />
         <hr/>
       </content-block>
     </template>
@@ -25,6 +25,7 @@
 <script>
 import Container from '@/components/common/Container.vue';
 import ContentBlock from '@/components/common/ContentBlock.vue';
+import CloseButton from '@/components/common/CloseButton.vue';
 
 export default {
   name: 'Menu',
@@ -45,6 +46,7 @@ export default {
   components: {
     Container,
     ContentBlock,
+    CloseButton,
   },
   methods: {
     itemClicked(item) {
@@ -74,7 +76,6 @@ export default {
     width: 100%;
     flex-direction: column;
     .close {
-      cursor: pointer;
       position: absolute;
       top: .5rem;
       right: 1rem;
